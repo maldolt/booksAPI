@@ -1,6 +1,6 @@
 const express = require("express");
 const books = express.Router();
-const booksSchema = require("../models/books.js");
+const Book = require("../models/books.js");
 
 books.get('/seed', (req, res) => {
     Book.insertMany([{
