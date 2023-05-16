@@ -14,10 +14,13 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(methodOverride('_method'))
 
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(() => { console.log('connected to mongo: ', process.env.MONGO_URI) })
+
 app.use('/books', require('./controllers/books_controllers'))
 //home
 app.get('/', (req, res) => {
-    res.render('home')
+    res.send('Welcome')
   })
   
 
@@ -27,8 +30,6 @@ app.get('/', (req, res) => {
   })
   
 
-  mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
-  .then(() => { console.log('connected to mongo: ', process.env.MONGO_URI) })
   
 app.listen(process.env.PORT)
 
